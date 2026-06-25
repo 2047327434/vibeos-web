@@ -1,0 +1,88 @@
+/* ============================================
+   VibeOS Desktop - VibeOS White Desktop
+   ============================================ */
+
+#desktop {
+  position: fixed;
+  inset: 0;
+  background: var(--wallpaper-bg);
+  overflow: hidden;
+}
+
+/* Context Menu */
+.context-menu {
+  position: fixed;
+  min-width: 180px;
+  max-width: 280px;
+  background: var(--color-bg-contextmenu);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-xs) 0;
+  z-index: var(--z-contextmenu);
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.context-menu.visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: all;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 4px var(--space-xl);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.menu-item:hover {
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+.menu-item .menu-icon {
+  width: 18px;
+  text-align: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.menu-item .menu-label {
+  flex: 1;
+}
+
+.menu-separator {
+  height: 1px;
+  background: var(--color-divider);
+  margin: 2px 0;
+}
+
+/* Desktop overlay */
+.desktop-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg-overlay);
+  z-index: var(--z-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Show desktop label on top-right */
+.desktop-label {
+  position: fixed;
+  top: 6px;
+  right: 12px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  z-index: var(--z-menubar);
+  pointer-events: none;
+}

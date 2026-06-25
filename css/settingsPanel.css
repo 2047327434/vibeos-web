@@ -1,0 +1,317 @@
+/* === Settings Panel (minimal, no advanced effects) === */
+
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: var(--z-overlay, 4000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.settings-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.settings-panel {
+  width: 460px;
+  max-height: 86vh;
+  background: var(--color-bg-window, #ffffff);
+  border: 1px solid var(--color-border, #d0d0d0);
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: var(--font-size-base, 13px);
+  color: var(--color-text-primary, #1d1d1f);
+}
+
+/* Header */
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border, #d0d0d0);
+  flex-shrink: 0;
+}
+
+.settings-title {
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.settings-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-text-secondary, #666);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.settings-close:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--color-text-primary, #1d1d1f);
+}
+
+/* Body */
+.settings-body {
+  padding: 4px 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Section */
+.settings-section {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.settings-section:last-child {
+  border-bottom: none;
+}
+
+.settings-section-title {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold, 600);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--color-text-secondary, #666);
+  margin-bottom: 8px;
+}
+
+/* Row */
+.settings-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.settings-label {
+  flex-shrink: 0;
+  width: 120px;
+  font-size: 12px;
+  color: var(--color-text-secondary, #666);
+}
+
+.settings-hint {
+  font-style: normal;
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--color-accent, #007aff);
+  margin-left: 2px;
+}
+
+.settings-input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border, #d0d0d0);
+  border-radius: 5px;
+  background: var(--color-bg-window, #ffffff);
+  color: var(--color-text-primary, #1d1d1f);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+}
+
+.settings-input:focus {
+  border-color: var(--color-accent, #007aff);
+}
+
+/* Range slider */
+input[type="range"].settings-input {
+  padding: 0;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+input[type="range"].settings-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-accent, #007aff);
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+input[type="range"].settings-input::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-accent, #007aff);
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+/* Buttons */
+.settings-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: var(--font-weight-medium, 500);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.settings-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.settings-btn-primary {
+  background: var(--color-accent, #007aff);
+  color: #fff;
+}
+
+.settings-btn-primary:hover:not(:disabled) {
+  background: var(--color-accent-hover, #005ecb);
+}
+
+.settings-btn-secondary {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--color-text-primary, #1d1d1f);
+}
+
+.settings-btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.settings-btn-toggle {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--color-text-primary, #1d1d1f);
+  margin-right: 6px;
+}
+
+.settings-btn-toggle:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Wallpaper swatches */
+.settings-swatches {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.settings-swatch {
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+}
+
+.settings-swatch:hover {
+  border-color: var(--color-accent, #007aff);
+}
+
+/* Test result */
+.settings-test-result {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.settings-test-result.test-ok {
+  background: rgba(52, 199, 89, 0.1);
+  color: #248a3d;
+  border: 1px solid rgba(52, 199, 89, 0.3);
+}
+
+.settings-test-result.test-fail {
+  background: rgba(255, 59, 48, 0.08);
+  color: #d70015;
+  border: 1px solid rgba(255, 59, 48, 0.25);
+}
+
+.settings-test-result.test-pending {
+  background: rgba(0, 122, 255, 0.06);
+  color: var(--color-accent, #007aff);
+  border: 1px solid rgba(0, 122, 255, 0.2);
+}
+
+.settings-test-result.test-info {
+  background: rgba(88, 86, 214, 0.08);
+  color: #5856d6;
+  border: 1px solid rgba(88, 86, 214, 0.25);
+}
+
+/* Footer */
+.settings-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--color-border, #d0d0d0);
+  flex-shrink: 0;
+}
+
+/* === Dark theme overrides === */
+#desktop.dark .settings-panel {
+  background: var(--color-bg-window, #2c2c2e);
+  color: var(--color-text-primary, #f5f5f7);
+}
+
+#desktop.dark .settings-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#desktop.dark .settings-section {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+#desktop.dark .settings-input {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary, #f5f5f7);
+}
+
+#desktop.dark .settings-btn-secondary,
+#desktop.dark .settings-btn-toggle {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#desktop.dark .settings-btn-secondary:hover,
+#desktop.dark .settings-btn-toggle:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+#desktop.dark .settings-swatch {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+#desktop.dark .settings-test-result.test-ok {
+  background: rgba(48, 209, 88, 0.12);
+  color: #30d158;
+}
+
+#desktop.dark .settings-test-result.test-fail {
+  background: rgba(255, 69, 58, 0.12);
+  color: #ff453a;
+}
+
+#desktop.dark input[type="range"].settings-input {
+  background: rgba(255, 255, 255, 0.1);
+}

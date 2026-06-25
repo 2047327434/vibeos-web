@@ -1,0 +1,288 @@
+/* ============================================
+   VibeOS CSS Variables - VibeOS / System 7 Style
+   Exact colors from desktop.c source
+   ============================================ */
+
+:root {
+  /* === Colors (from VibeOS desktop.c) === */
+  --color-bg-desktop:        #ffffff;
+  --color-bg-window:         #ffffff;
+  --color-bg-titlebar:       #f0f0f0;
+  --color-bg-titlebar-focus: #f0f0f0;
+  --color-bg-titlebar-unfocus:#e8e8e8;
+  --color-bg-menubar:        #f5f5f5;
+  --color-bg-dock:           rgba(240, 240, 240, 0.75);
+  --color-bg-contextmenu:    #ffffff;
+  --color-bg-hover:          rgba(0, 0, 0, 0.06);
+  --color-bg-active:         rgba(0, 122, 255, 0.15);
+  --color-bg-overlay:        rgba(255, 255, 255, 0.7);
+  --color-bg-dialog:         #ffffff;
+  --color-bg-input:          #ffffff;
+  --color-bg-button:         #e8e8e8;
+  --color-bg-button-hover:   #d4d4d4;
+
+  /* Text */
+  --color-text-primary:      #333333;
+  --color-text-secondary:    #666666;
+  --color-text-tertiary:     #999999;
+  --color-text-inverse:      #ffffff;
+
+  /* Accent */
+  --color-accent:            #007aff;
+  --color-accent-hover:      #005ecb;
+  --color-accent-light:      rgba(0, 122, 255, 0.12);
+  --color-accent-text:       #ffffff;
+
+  /* macOS Traffic Lights */
+  --color-close:             #ff5f57;
+  --color-close-border:      #e0443e;
+  --color-minimize:          #ffbd2e;
+  --color-minimize-border:   #dea123;
+  --color-maximize:          #28c840;
+  --color-maximize-border:   #1fa82d;
+
+  /* Borders */
+  --color-border:            #d0d0d0;
+  --color-border-light:      #e0e0e0;
+  --color-divider:           #d0d0d0;
+
+  --color-danger:            #ff3b30;
+  --color-success:           #34c759;
+  --color-warning:           #ff9500;
+
+  /* === Wallpaper: White (matching VibeOS) === */
+  --wallpaper-bg: #ffffff;
+
+  /* === Typography === */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Chicago', 'Charcoal',
+                 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei',
+                 Arial, sans-serif;
+  --font-size-xs:     11px;
+  --font-size-sm:     12px;
+  --font-size-base:   13px;
+  --font-size-md:     13px;
+  --font-size-lg:     16px;
+  --font-size-xl:     20px;
+  --font-weight-normal:  400;
+  --font-weight-medium:  500;
+  --font-weight-semibold: 600;
+
+  /* === Spacing === */
+  --space-xxs:  2px;
+  --space-xs:   4px;
+  --space-sm:   6px;
+  --space-md:   8px;
+  --space-lg:   12px;
+  --space-xl:   16px;
+  --space-xxl:  24px;
+
+  /* === Border Radius === */
+  --radius-sm:    3px;
+  --radius-md:    5px;
+  --radius-lg:    8px;
+  --radius-xl:    10px;
+  --radius-round: 50%;
+
+  /* === Shadows (subtle, System 7 style) === */
+  --shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md:   0 1px 4px rgba(0, 0, 0, 0.08);
+  --shadow-lg:   0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-xl:   0 8px 32px rgba(0, 0, 0, 0.18);
+  --shadow-window: 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --shadow-window-focus: 0 2px 6px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.06);
+
+  /* === Window === */
+  --window-radius:       6px;
+  --window-min-width:    300px;
+  --window-min-height:   200px;
+  --titlebar-height:     28px;
+  --traffic-light-size:  11px;
+  --traffic-light-gap:   6px;
+  --resize-handle-size:  4px;
+  --resize-corner-size:  12px;
+
+  /* === Menubar === */
+  --menubar-height:       28px;
+
+  /* === Dock === */
+  --dock-height:          56px;
+  --dock-padding:         5px;
+  --dock-icon-size:       38px;
+  --dock-gap:             3px;
+
+  /* === Desktop Icons === */
+  --desktop-icon-size:    40px;
+  --desktop-icon-gap:     16px;
+
+  /* === Animations (minimal, System 7 had no animations) === */
+  --transition-fast:   80ms ease;
+  --transition-normal: 120ms ease;
+  --transition-slow:   200ms ease;
+
+  /* === Z-Index === */
+  --z-desktop:       1;
+  --z-menubar:       2000;
+  --z-dock:          1500;
+  --z-window:        100;
+  --z-window-focus:  200;
+  --z-contextmenu:   2100;
+  --z-notification:  3000;
+  --z-overlay:       4000;
+  --z-spotlight:     5000;
+}
+
+/* === Desktop Icons Area === */
+.desktop-icons {
+  position: absolute;
+  top: calc(var(--menubar-height) + 8px);
+  left: 0;
+  right: 0;
+  bottom: calc(var(--dock-height) + 20px);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: var(--desktop-icon-gap);
+  z-index: var(--z-desktop);
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 82px;
+  padding: 6px 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.1s;
+  /* 禁止双击 / 拖动时选中标签文字 */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.desktop-icon .icon-label {
+  pointer-events: none;
+}
+
+.desktop-icon:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+.desktop-icon:active,
+.desktop-icon.selected {
+  background: rgba(0,122,255,0.1);
+  outline: 2px solid rgba(0,122,255,0.25);
+  outline-offset: -2px;
+  border-radius: 6px;
+}
+
+.desktop-icon .icon-img {
+  width: var(--desktop-icon-size); height: var(--desktop-icon-size);
+  display: flex; align-items: center; justify-content: center;
+  font-size: calc(var(--desktop-icon-size) * 0.9);
+  margin-bottom: 3px;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.04));
+}
+
+.desktop-icon .icon-label {
+  font-size: var(--font-size-xs); font-weight: 400; color: var(--color-text-primary);
+  text-align: center; line-height: 1.3; max-width: 78px;
+  overflow: hidden; text-overflow: ellipsis;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+
+/* ============================================
+   Dark Theme — #desktop.dark override
+   ============================================ */
+#desktop.dark {
+  --color-bg-desktop:        #1c1c1e;
+  --color-bg-window:         #2c2c2e;
+  --color-bg-titlebar:       #3a3a3c;
+  --color-bg-titlebar-focus: #3a3a3c;
+  --color-bg-titlebar-unfocus:#2c2c2e;
+  --color-bg-menubar:        rgba(40, 40, 42, 0.72);
+  --color-bg-dock:           rgba(44, 44, 46, 0.72);
+  --color-bg-contextmenu:    #2c2c2e;
+  --color-bg-hover:          rgba(255, 255, 255, 0.08);
+  --color-bg-active:         rgba(10, 132, 255, 0.20);
+  --color-bg-overlay:        rgba(0, 0, 0, 0.6);
+  --color-bg-dialog:         #2c2c2e;
+  --color-bg-input:          #3a3a3c;
+  --color-bg-button:         #3a3a3c;
+  --color-bg-button-hover:   #48484a;
+
+  --color-text-primary:      #f5f5f7;
+  --color-text-secondary:    #aeaeb2;
+  --color-text-tertiary:     #636366;
+  --color-text-inverse:      #1c1c1e;
+
+  --color-border:            #48484a;
+  --color-border-light:      #3a3a3c;
+  --color-divider:           #48484a;
+
+  --wallpaper-bg: #1c1c1e;
+
+  --shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md:   0 1px 4px rgba(0, 0, 0, 0.35);
+  --shadow-lg:   0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-xl:   0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-window: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-window-focus: 0 2px 6px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Dark theme: menubar background override */
+#desktop.dark #menubar {
+  background: rgba(40, 40, 42, 0.72);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+#desktop.dark #menubar .menubar-dropdown {
+  background: rgba(44, 44, 46, 0.92);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Dark theme: window titlebar gradient */
+#desktop.dark .window-titlebar {
+  background: linear-gradient(180deg, #3a3a3c 0%, #2c2c2e 100%);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+#desktop.dark .window.unfocused .window-titlebar {
+  background: linear-gradient(180deg, #2c2c2e 0%, #1c1c1e 100%);
+}
+#desktop.dark .window.unfocused .window-control-btn {
+  background: #48484a !important;
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Dark theme: dock border */
+#desktop.dark #dock {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Dark theme: desktop icon hover/selection */
+#desktop.dark .desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+#desktop.dark .desktop-icon:active,
+#desktop.dark .desktop-icon.selected {
+  background: rgba(10, 132, 255, 0.2);
+  outline-color: rgba(10, 132, 255, 0.35);
+}
+
+/* Dark theme: scrollbar */
+#desktop.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+#desktop.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+#desktop.dark * {
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+/* Dark theme: spotlight overlay */
+#desktop.dark #spotlight-overlay {
+  background: rgba(0, 0, 0, 0.45);
+}

@@ -1,0 +1,209 @@
+/* ============================================
+   VibeOS Window Manager - Refined UI
+   ============================================ */
+
+/* 拖拽 / 缩放窗口时屏蔽 iframe 鼠标事件，避免 mouseup 被 iframe 吞掉导致"卡住" */
+body.vibeos-dragging iframe { pointer-events: none !important; }
+body.vibeos-dragging { cursor: default !important; user-select: none !important; -webkit-user-select: none !important; }
+
+.window {
+  position: absolute;
+  min-width: var(--window-min-width);
+  min-height: var(--window-min-height);
+  background: var(--color-bg-window);
+  border-radius: var(--window-radius);
+  box-shadow: var(--shadow-window);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: var(--z-window);
+}
+
+.window.focused {
+  box-shadow: var(--shadow-window-focus);
+}
+
+.window.opening {
+  animation: winOpen 180ms cubic-bezier(0.22,0.61,0.36,1) forwards;
+}
+@keyframes winOpen {
+  from { opacity: 0; transform: scale(0.92) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.window.closing {
+  animation: winClose 120ms ease-in forwards;
+  pointer-events: none;
+}
+@keyframes winClose {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.94); }
+}
+
+.window.minimizing {
+  animation: winMin 200ms ease-in forwards;
+  pointer-events: none;
+}
+@keyframes winMin {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(60px) scale(0.7); }
+}
+
+.window.maximized {
+  border-radius: 0 !important;
+  top: var(--menubar-height) !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: calc(100vh - var(--menubar-height) - var(--dock-height) - 12px) !important;
+  box-shadow: none !important;
+}
+
+/* === Title Bar === */
+.window-titlebar {
+  height: var(--titlebar-height);
+  background: linear-gradient(180deg, #ececec 0%, #d8d8d8 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-md);
+  flex-shrink: 0;
+  cursor: default;
+  border-radius: var(--window-radius) var(--window-radius) 0 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+  gap: var(--space-md);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.window.focused .window-titlebar {
+  background: linear-gradient(180deg, #ececec 0%, #d8d8d8 100%);
+}
+
+.window.unfocused .window-titlebar {
+  background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
+}
+
+/* === Traffic Lights === */
+.window-controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.window-control-btn {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+  cursor: pointer;
+  position: relative;
+  transition: filter 0.1s;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* 默认隐藏 SVG 图标，hover 时再显示（保持 macOS 经典手感） */
+  color: rgba(0,0,0,0);
+  overflow: hidden;
+}
+
+.window-control-btn svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.window.unfocused .window-control-btn {
+  background: #dcdcdc !important;
+  border-color: rgba(0,0,0,0.06);
+}
+
+.window.focused .close-btn    { background: var(--color-close); border-color: var(--color-close-border); }
+.window.focused .minimize-btn { background: var(--color-minimize); border-color: var(--color-minimize-border); }
+.window.focused .maximize-btn { background: var(--color-maximize); border-color: var(--color-maximize-border); }
+
+.window-control-btn:hover { filter: brightness(0.82); }
+
+/* hover traffic-lights 整组时显示 SVG 字形，颜色与圆点对应深色调 */
+.window-controls:hover .close-btn    { color: rgba(80, 0, 0, 0.78); }
+.window-controls:hover .minimize-btn { color: rgba(100, 70, 0, 0.78); }
+.window-controls:hover .maximize-btn { color: rgba(0, 70, 0, 0.78); }
+
+
+/* === Window Title === */
+.window-titlebar .window-icon {
+  width: 16px; height: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.window-titlebar .window-icon .vibeos-icon-app,
+.window-titlebar .window-icon .vibeos-icon-glyph {
+  width: 16px; height: 16px; display: block;
+}
+
+.window-titlebar .window-title {
+  flex: 1; text-align: center;
+  font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); color: var(--color-text-primary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  letter-spacing: 0.1px; padding: 0 var(--space-xxl);
+  font-family: var(--font-family);
+}
+
+.window.unfocused .window-titlebar .window-title { color: var(--color-text-tertiary); }
+
+.window-save-btn {
+  cursor: pointer; opacity: 0.6;
+  padding: 4px; border-radius: 4px;
+  transition: opacity 0.15s, background 0.15s;
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.window-save-btn:hover { opacity: 1; background: rgba(0,0,0,0.06); }
+
+.window-prompt-btn {
+  cursor: pointer; opacity: 0.6;
+  padding: 4px; border-radius: 4px;
+  transition: opacity 0.15s, background 0.15s, color 0.15s;
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.window-prompt-btn:hover { opacity: 1; background: rgba(0,0,0,0.06); color: var(--color-accent) !important; }
+
+/* === Content === */
+.window-content {
+  flex: 1; overflow: hidden; background: var(--color-bg-window);
+}
+
+.window-content iframe {
+  width: 100%; height: 100%; border: none; display: block;
+}
+
+.window-content .placeholder {
+  display: flex; align-items: center; justify-content: center;
+  height: 100%; font-size: var(--font-size-md); color: var(--color-text-tertiary);
+  flex-direction: column; gap: var(--space-xl);
+}
+.window-content .placeholder .icon { font-size: 44px; opacity: 0.25; }
+
+/* === Resize Handles === */
+.resize-handle { position: absolute; z-index: 10; }
+.resize-handle.top    { top: 0; left: 14px; right: 14px; height: 3px; cursor: n-resize; }
+.resize-handle.bottom { bottom: 0; left: 14px; right: 14px; height: 3px; cursor: s-resize; }
+.resize-handle.left   { left: 0; top: 14px; bottom: 14px; width: 3px; cursor: w-resize; }
+.resize-handle.right  { right: 0; top: 14px; bottom: 14px; width: 3px; cursor: e-resize; }
+.resize-handle.top-left     { top: 0; left: 0; width: 14px; height: 14px; cursor: nw-resize; }
+.resize-handle.top-right    { top: 0; right: 0; width: 14px; height: 14px; cursor: ne-resize; }
+.resize-handle.bottom-left  { bottom: 0; left: 0; width: 14px; height: 14px; cursor: sw-resize; }
+.resize-handle.bottom-right { bottom: 0; right: 0; width: 14px; height: 14px; cursor: se-resize; }
+
+.window.maximized .resize-handle { display: none; }
+.window.maximized .window-titlebar { border-radius: 0; }
+
+/* === Reduced motion === */
+@media (prefers-reduced-motion: reduce) {
+  .window.opening,
+  .window.closing,
+  .window.minimizing {
+    animation: none !important;
+  }
+}

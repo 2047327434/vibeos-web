@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VibeOS - AI 驱动的网页操作系统</title>
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%235ec8ff'/><stop offset='1' stop-color='%231a8cff'/></linearGradient></defs><rect x='2' y='2' width='60' height='60' rx='14' fill='url(%23g)'/><rect x='12' y='18' width='40' height='32' rx='4' fill='white'/></svg>" />
+  <link rel="stylesheet" href="css/reset.css?v=14">
+  <link rel="stylesheet" href="css/variables.css?v=14">
+  <link rel="stylesheet" href="css/desktop.css?v=14">
+  <link rel="stylesheet" href="css/menubar.css?v=14">
+  <link rel="stylesheet" href="css/dock.css?v=14">
+  <link rel="stylesheet" href="css/window.css?v=14">
+  <link rel="stylesheet" href="css/components.css?v=14">
+  <link rel="stylesheet" href="css/settingsPanel.css?v=14">
+  <style>
+    body{margin:0;background:var(--wallpaper-bg,#f0f0f0);}#desktop{background:var(--wallpaper-bg,#fff);}
+    /* === Vector icon system === */
+    .vibeos-icon{display:inline-block;vertical-align:middle;}
+    /* 默认让 SVG 充满父容器，避免菜单栏中不同字号导致大小不一致 */
+    .vibeos-icon-app{width:100%;height:100%;display:block;}
+    .vibeos-icon-glyph{width:100%;height:100%;display:block;color:currentColor;}
+    /* 桌面图标尺寸 */
+    .icon-img{display:flex;align-items:center;justify-content:center;width:48px;height:48px;}
+    .icon-img .vibeos-icon-app{width:100%;height:100%;}
+    /* Dock 图标 */
+    .dock-icon{display:flex;align-items:center;justify-content:center;}
+    /* 窗口标题栏图标 */
+    .window-titlebar .vibeos-icon-app{width:100%;height:100%;}
+    /* 上下文菜单 / 通知中心小图标 */
+    .menu-icon{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;}
+    .notif-icon{display:inline-flex;align-items:center;justify-content:center;}
+  </style>
+</head>
+<body>
+  <div id="desktop">
+    <div class="desktop-icons" id="desktop-icons"></div>
+  </div>
+  <script src="js/icons.js?v=14"></script>
+  <script src="js/config.js?v=14"></script>
+  <script src="js/filesystem.js?v=14"></script>
+  <script src="js/appRegistry.js?v=14"></script>
+  <script src="js/installedApps.js?v=14"></script>
+  <script src="js/notification.js?v=14"></script>
+  <script src="js/sandbox.js?v=14"></script>
+  <script src="js/windowManager.js?v=14"></script>
+  <script src="js/desktop.js?v=14"></script>
+  <script src="js/menubar.js?v=14"></script>
+  <script src="js/dock.js?v=14"></script>
+  <script src="js/appGenerator.js?v=14"></script>
+  <script src="js/settingsPanel.js?v=14"></script>
+  <script src="js/kernel.js?v=14"></script>
+</body>
+</html>
